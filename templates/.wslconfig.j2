@@ -1,0 +1,343 @@
+#################################################
+# WSL configuration file (.wslconfig)
+# Controls global WSL 2 virtual machine settings.
+#################################################
+
+# Location: C:\Users\<UserName>\.wslconfig
+
+# Purpose:
+#   - Configure kernel, its modules and parameters
+#   - Control CPU and memory usage
+#   - Set virtual machine disk size for new distributions
+#   - Define swap file size and location
+#   - Adjust networking and DNS behavior
+#   - Enable or disable proxy and firewall
+#   - Set port forwarding preferences
+
+# ==============================================
+# ⚠️ IMPORTANT
+# Has no effect on WSL1 distributions.
+# ==============================================
+
+# Reference:
+# Configuration: https://github.com/greengorych/wsl-configurations/blob/main/defaults/.wslconfig/.wslconfig
+# Documentation: https://github.com/greengorych/wsl-configurations/blob/main/defaults/.wslconfig/README.md
+
+
+[wsl2]
+
+# Absolute Windows path to a custom Linux kernel.
+# Available since: Windows 10 18362+
+# Dependencies: None
+# Default: Built-in Microsoft kernel
+# Example: kernel=C:\\Path\\To\\CustomKernel
+{% if wslconfig_wsl2_kernel is defined and wslconfig_wsl2_kernel %}
+kernel={{ wslconfig_wsl2_kernel }}
+{% else %}
+# kernel=
+{% endif %}
+
+# Path to a VHD with Linux kernel modules.
+# Available since: Windows 10 18362+
+# Default: Not set
+# Example: kernelModules=C:\\Path\\To\\Modules.vhdx
+{% if wslconfig_wsl2_kernel_modules is defined and wslconfig_wsl2_kernel_modules %}
+kernelModules={{ wslconfig_wsl2_kernel_modules }}
+{% else %}
+# kernelModules=
+{% endif %}
+
+# Extra kernel parameters to pass during boot.
+# Available since: Windows 10 18362+
+# Dependencies: None
+# Default: Empty
+# Example: kernelCommandLine=quiet splash
+{% if wslconfig_wsl2_kernel_command_line is defined and wslconfig_wsl2_kernel_command_line %}
+kernelCommandLine={{ wslconfig_wsl2_kernel_command_line }}
+{% else %}
+# kernelCommandLine=
+{% endif %}
+
+# Limit the number of logical CPU cores used.
+# Available since: Windows 10 18362+
+# Dependencies: None
+# Default: All available logical processors
+# Example: processors=2
+{% if wslconfig_wsl2_processors is defined and wslconfig_wsl2_processors %}
+processors={{ wslconfig_wsl2_processors }}
+{% else %}
+# processors=
+{% endif %}
+
+# Limit the amount of RAM used by WSL virtual machine.
+# Available since: Windows 10 18362+
+# Dependencies: None
+# Default: 50% of total physical RAM
+# Example: memory=4GB
+{% if wslconfig_wsl2_memory is defined and wslconfig_wsl2_memory %}
+memory={{ wslconfig_wsl2_memory }}
+{% else %}
+# memory=
+{% endif %}
+
+# Swap file size used by WSL virtual machine.
+# Available since: Windows 10 18362+
+# Dependencies: None
+# Default: 25% of RAM, rounded to nearest GB
+# Example: swap=8GB, swap=0 to disable
+{% if wslconfig_wsl2_swap is defined and wslconfig_wsl2_swap %}
+swap={{ wslconfig_wsl2_swap }}
+{% else %}
+# swap=
+{% endif %}
+
+# Custom path for swap file.
+# Available since: Windows 10 18362+
+# Dependencies: None
+# Default: A temporary path like %USERPROFILE%\AppData\Local\Temp\<GUID>\swap.vhdx
+# Example: swapFile=C:\\Path\\To\\swap.vhdx
+{% if wslconfig_wsl2_swap_file is defined and wslconfig_wsl2_swap_file %}
+swapFile={{ wslconfig_wsl2_swap_file }}
+{% else %}
+# swapFile=
+{% endif %}
+
+# Controls the default virtual disk size used for new virtual machine.
+# Available since: Windows 11 22H2+
+# Dependencies: None
+# Default: 1TB (dynamically allocated)
+# Example: defaultVhdSize=20GB
+{% if wslconfig_wsl2_default_vhd_size is defined and wslconfig_wsl2_default_vhd_size %}
+defaultVhdSize={{ wslconfig_wsl2_default_vhd_size }}
+{% else %}
+# defaultVhdSize=
+{% endif %}
+
+# Virtual switch used for the WSL virtual machine.
+# Available since: Windows 10 18362+
+# Dependencies: Required only for networkingMode=bridged. Requires Hyper-V and a manually created virtual switch.
+# Default: Default Switch (if not specified)
+# Example: vmSwitch=MyCustomSwitch
+{% if wslconfig_wsl2_vm_switch is defined and wslconfig_wsl2_vm_switch %}
+vmSwitch={{ wslconfig_wsl2_vm_switch }}
+{% else %}
+# vmSwitch=
+{% endif %}
+
+# Network mode for WSL.
+# Available since: Windows 11 22H2+
+# Dependencies: In networkingMode=bridged requires a virtual switch to be configured and Hyper-V to be enabled.
+# Default: nat
+# Values:
+# - nat
+# - mirrored
+# - bridged
+# - virtioproxy
+{% if wslconfig_wsl2_networking_mode is defined and wslconfig_wsl2_networking_mode %}
+networkingMode={{ wslconfig_wsl2_networking_mode }}
+{% else %}
+# networkingMode=
+{% endif %}
+
+# Set a fixed MAC address for the WSL virtual network adapter.
+# Available since: Windows 11 22H2+
+# Dependencies: Unknown
+# Default: Random MAC address per VM start
+# Example: macAddress=00:15:5D:00:01:02
+{% if wslconfig_wsl2_mac_address is defined and wslconfig_wsl2_mac_address %}
+macAddress={{ wslconfig_wsl2_mac_address }}
+{% else %}
+# macAddress=
+{% endif %}
+
+# Controls whether DHCP is used for the WSL network adapter.
+# Available since: Windows 11 22H2+
+# Dependencies: Unknown
+# Default: true
+# Values:
+# - true
+# - false
+dhcp={{ wslconfig_wsl2_dhcp | lower }}
+
+# Controls whether IPv6 is used in WSL virtual networking.
+# Available since: Windows 11 22H2+
+# Dependencies: None
+# Default: true
+# Values:
+# - true
+# - false
+ipv6={{ wslconfig_wsl2_ipv6 | lower }}
+
+# Controls whether localhost port forwarding is used between Windows and WSL.
+# Available since: Windows 10 18362+
+# Dependencies: Does not work in networkingMode=mirrored.
+# Default: true
+# Values:
+# - true
+# - false
+localhostForwarding={{ wslconfig_wsl2_localhost_forwarding | lower }}
+
+# Controls whether DNS requests from WSL are proxied through the Windows DNS resolver.
+# Available since: Windows 10 18362+
+# Dependencies: None
+# Default: true
+# Values:
+# - true
+# - false
+dnsProxy={{ wslconfig_wsl2_dns_proxy | lower }}
+
+# Controls whether DNS queries from WSL are tunneled via the Windows networking stack instead of resolving directly in WSL.
+# Available since: Windows 11 22H2+
+# Dependencies:
+# - networkingMode=nat (if networkingMode=mirrored, dnsTunneling must be disabled )
+# - dnsProxy=true (if dnsProxy=false, dnsTunneling must be disabled)
+# Default: true
+# Values:
+# - true
+# - false
+dnsTunneling={{ wslconfig_wsl2_dns_tunneling | lower }}
+
+# Controls whether Windows Firewall and Hyper-V network filters are applied to WSL.
+# Available since: Windows 11 22H2+
+# Dependencies: None
+# Default: true
+# Values:
+# - true
+# - false
+firewall={{ wslconfig_wsl2_firewall | lower }}
+
+# Controls whether WSL uses system proxy settings from Windows.
+# Available since: Windows 11
+# Dependencies: None
+# Default: true
+# Values:
+# - true
+# - false
+autoProxy={{ wslconfig_wsl2_auto_proxy | lower }}
+
+# Controls whether GUI Linux applications (WSLg) are available.
+# Available since: Windows 11
+# Dependencies: None
+# Default: true
+# Values:
+# - true
+# - false
+guiApplications={{ wslconfig_wsl2_gui_applications | lower }}
+
+# Controls whether nested virtualization is supported.
+# Available since: Windows 11
+# Dependencies: None
+# Default: true
+# Values:
+# - true
+# - false
+nestedVirtualization={{ wslconfig_wsl2_nested_virtualization | lower }}
+
+# Time before WSL VM shuts down due to inactivity (in milliseconds).
+# Available since: Windows 11
+# Dependencies: None
+# Default: 60000 (1 minute). Set to 0 to keep the VM always running (disable auto shutdown).
+{% if wslconfig_wsl2_vm_idle_timeout is defined and wslconfig_wsl2_vm_idle_timeout %}
+vmIdleTimeout={{ wslconfig_wsl2_vm_idle_timeout }}
+{% else %}
+# vmIdleTimeout=
+{% endif %}
+
+# Controls whether WSL boots in safe recovery mode.
+# Available since: Windows 11
+# Dependencies: None
+# Default: false
+# Values:
+# - true
+# - false
+safeMode={{ wslconfig_wsl2_safe_mode | lower }}
+
+# Controls whether a debug console with dmesg output is shown at virtual machine startup.
+# Available since: Windows 11
+# Dependencies: None
+# Default: false
+# Values:
+# - true
+# - false
+debugConsole={{ wslconfig_wsl2_debug_console | lower }}
+
+
+[experimental]
+
+# Controls the behavior of memory reclaim in the WSL virtual machine.
+# Available since: Windows 11
+# Dependencies: None
+# Default: gradual
+# Values:
+# - disabled: Turn off memory reclaim
+# - gradual: Release memory slowly after 10 mins of CPU inactivity
+# - dropcache: Release all cached memory after idle is detected
+{% if wslconfig_experimental_auto_memory_reclaim is defined and wslconfig_experimental_auto_memory_reclaim %}
+autoMemoryReclaim={{ wslconfig_experimental_auto_memory_reclaim }}
+{% else %}
+# autoMemoryReclaim=
+{% endif %}
+
+# Controls whether the virtual disk can dynamically shrink to save space.
+# Available since: Windows 11 
+# Dependencies: None
+# Default: true
+# Values:
+# - true
+# - false
+sparseVhd={{ wslconfig_experimental_sparse_vhd | lower }}
+
+# Controls whether DNS parsing compatibility is improved.
+# Available since: Windows 11 22H2+
+# Dependencies:
+# - networkingMode=nat (if networkingMode=mirrored, dnsTunneling must be disabled )
+# - dnsProxy=true (if dnsProxy=false, dnsTunneling must be disabled)
+# - dnsTunneling=true (if dnsTunneling=false, bestEffortDnsParsing becomes irrelevant)
+# Default: false
+# Values:
+# - true
+# - false
+bestEffortDnsParsing={{ wslconfig_experimental_best_effort_dns_parsing | lower }}
+
+# Controls the IP address used for DNS tunneling.
+# Available since: Windows 11 22H2+
+# Dependencies:
+# - Must be used with networkingMode=nat
+# - Requires dnsProxy=true
+# - Irrelevant if dnsTunneling=false
+# Default: 10.255.255.254
+{% if wslconfig_experimental_dns_tunneling_ip_address is defined and wslconfig_experimental_dns_tunneling_ip_address %}
+dnsTunnelingIpAddress={{ wslconfig_experimental_dns_tunneling_ip_address }}
+{% else %}
+# dnsTunnelingIpAddress=
+{% endif %}
+
+# Controls the timeout for reading Windows proxy settings on startup (in milliseconds).
+# Available since: Windows 11
+# Dependencies: autoProxy=true (if autoProxy=false, initialAutoProxyTimeout becomes irrelevant).
+# Default: 1000
+{% if wslconfig_experimental_initial_auto_proxy_timeout is defined and wslconfig_experimental_initial_auto_proxy_timeout %}
+initialAutoProxyTimeout={{ wslconfig_experimental_initial_auto_proxy_timeout }}
+{% else %}
+# initialAutoProxyTimeout=
+{% endif %}
+
+# Controls whether specific ports are ignored in mirrored networking mode.
+# Available since: Windows 11 22H2+
+# Dependencies: networkingMode=mirrored 
+# Default: Not set
+# Example: ignoredPorts=3000,8080
+{% if wslconfig_experimental_ignored_ports is defined and wslconfig_experimental_ignored_ports %}
+ignoredPorts={{ wslconfig_experimental_ignored_ports }}
+{% else %}
+# ignoredPorts=
+{% endif %}
+
+# Allows the host and container to communicate via loopback (127.0.0.1 from inside containers).
+# Available since: Windows 11 22H2+
+# Dependencies: None
+# Default: false
+# Values:
+# - true
+# - false
+hostAddressLoopback={{ wslconfig_experimental_host_address_loopback | lower }}

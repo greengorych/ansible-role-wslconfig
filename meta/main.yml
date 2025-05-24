@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: MIT
+---
+
+galaxy_info:
+  author: greengorych
+  description: Ansible role to manage Windows Subsystem for Linux (WSL) global configuration file .wslconfig.
+  issue_tracker_url: https://github.com/greengorych/ansible-role-wslconfig/issues
+  license: MIT
+  min_ansible_version: "2.12"
+
+  platforms:
+    - name: all
+      versions:
+        - all
+
+  galaxy_tags:
+    - wsl
+    - wsl2
+    - .wslconfig
+    - configuration
+
+dependencies: []
