@@ -16,69 +16,59 @@
 # wsl2
 
 # Absolute Windows path to a custom Linux kernel.
-# Available since: Windows 10 18362+
 # Dependencies: None
 # Default: Built-in Microsoft kernel
 # Example: kernel=C:\\Path\\To\\CustomKernel
 # wslconfig_wsl2_kernel:
 
 # Path to a VHD with Linux kernel modules.
-# Available since: Windows 10 18362+
 # Default: Not set
 # Example: kernelModules=C:\\Path\\To\\Modules.vhdx
 # wslconfig_wsl2_kernel_modules:
 
 # Extra kernel parameters to pass during boot.
-# Available since: Windows 10 18362+
 # Dependencies: None
 # Default: Empty
 # Example: kernelCommandLine=quiet splash
 # wslconfig_wsl2_kernel_command_line:
 
 # Limit the number of logical CPU cores used.
-# Available since: Windows 10 18362+
 # Dependencies: None
 # Default: All available logical processors
 # Example: processors=2
 # wslconfig_wsl2_processors:
 
 # Limit the amount of RAM used by WSL virtual machine.
-# Available since: Windows 10 18362+
 # Dependencies: None
 # Default: 50% of total physical RAM
 # Example: memory=4GB
 # wslconfig_wsl2_memory:
 
 # Swap file size used by WSL virtual machine.
-# Available since: Windows 10 18362+
 # Dependencies: None
 # Default: 25% of RAM, rounded to nearest GB
 # Example: swap=8GB, swap=0 to disable
 # wslconfig_wsl2_swap:
 
 # Custom path for swap file.
-# Available since: Windows 10 18362+
 # Dependencies: None
 # Default: A temporary path like %USERPROFILE%\AppData\Local\Temp\<GUID>\swap.vhdx
 # Example: swapFile=C:\\Path\\To\\swap.vhdx
 # wslconfig_wsl2_swap_file:
 
 # Controls the default virtual disk size used for new virtual machine.
-# Available since: Windows 11 22H2+
 # Dependencies: None
 # Default: 1TB (dynamically allocated)
 # Example: defaultVhdSize=20GB
 # wslconfig_wsl2_default_vhd_size: 1TB
 
 # Virtual switch used for the WSL virtual machine.
-# Available since: Windows 10 18362+
 # Dependencies: Required only for networkingMode=bridged. Requires Hyper-V and a manually created virtual switch.
 # Default: Default Switch (if not specified)
 # Example: vmSwitch=MyCustomSwitch
 # wslconfig_wsl2_vm_switch:
 
 # Network mode for WSL.
-# Available since: Windows 11 22H2+
 # Dependencies: In networkingMode=bridged requires a virtual switch to be configured and Hyper-V to be enabled.
 # Default: nat
 # Values:
@@ -89,14 +79,12 @@
 # wslconfig_wsl2_networking_mode: nat
 
 # Set a fixed MAC address for the WSL virtual network adapter.
-# Available since: Windows 11 22H2+
 # Dependencies: Unknown
 # Default: Random MAC address per VM start
 # Example: macAddress=00:15:5D:00:01:02
 # wslconfig_wsl2_mac_address:
 
 # Controls whether DHCP is used for the WSL network adapter.
-# Available since: Windows 11 22H2+
 # Dependencies: Unknown
 # Default: true
 # Values:
@@ -105,7 +93,6 @@
 # wslconfig_wsl2_dhcp: true
 
 # Controls whether IPv6 is used in WSL virtual networking.
-# Available since: Windows 11 22H2+
 # Dependencies: None
 # Default: true
 # Values:
@@ -114,7 +101,6 @@
 # wslconfig_wsl2_ipv6: true
 
 # Controls whether localhost port forwarding is used between Windows and WSL.
-# Available since: Windows 10 18362+
 # Dependencies: Does not work in networkingMode=mirrored.
 # Default: true
 # Values:
@@ -123,7 +109,6 @@
 # wslconfig_wsl2_localhost_forwarding: true
 
 # Controls whether DNS requests from WSL are proxied through the Windows DNS resolver.
-# Available since: Windows 10 18362+
 # Dependencies: None
 # Default: true
 # Values:
@@ -132,7 +117,6 @@
 # wslconfig_wsl2_dns_proxy: true
 
 # Controls whether DNS queries from WSL are tunneled via the Windows networking stack instead of resolving directly in WSL.
-# Available since: Windows 11 22H2+
 # Dependencies:
 # - networkingMode=nat (if networkingMode=mirrored, dnsTunneling must be disabled )
 # - dnsProxy=true (if dnsProxy=false, dnsTunneling must be disabled)
@@ -143,7 +127,6 @@
 # wslconfig_wsl2_dns_tunneling: true
 
 # Controls whether Windows Firewall and Hyper-V network filters are applied to WSL.
-# Available since: Windows 11 22H2+
 # Dependencies: None
 # Default: true
 # Values:
@@ -152,7 +135,6 @@
 # wslconfig_wsl2_firewall: true
 
 # Controls whether WSL uses system proxy settings from Windows.
-# Available since: Windows 11
 # Dependencies: None
 # Default: true
 # Values:
@@ -161,7 +143,6 @@
 # wslconfig_wsl2_auto_proxy: true
 
 # Controls whether GUI Linux applications (WSLg) are available.
-# Available since: Windows 11
 # Dependencies: None
 # Default: true
 # Values:
@@ -170,7 +151,6 @@
 # wslconfig_wsl2_gui_applications: true
 
 # Controls whether nested virtualization is supported.
-# Available since: Windows 11
 # Dependencies: None
 # Default: true
 # Values:
@@ -179,13 +159,11 @@
 # wslconfig_wsl2_nested_virtualization: true
 
 # Time before WSL VM shuts down due to inactivity (in milliseconds).
-# Available since: Windows 11
 # Dependencies: None
 # Default: 60000 (1 minute). Set to 0 to keep the VM always running (disable auto shutdown).
 # wslconfig_wsl2_vm_idle_timeout: 60000
 
 # Controls whether WSL boots in safe recovery mode.
-# Available since: Windows 11
 # Dependencies: None
 # Default: false
 # Values:
@@ -194,7 +172,6 @@
 # wslconfig_wsl2_safe_mode: false
 
 # Controls whether a debug console with dmesg output is shown at virtual machine startup.
-# Available since: Windows 11
 # Dependencies: None
 # Default: false
 # Values:
@@ -206,7 +183,6 @@
 # experimental
 
 # Controls the behavior of memory reclaim in the WSL virtual machine.
-# Available since: Windows 11
 # Dependencies: None
 # Default: gradual
 # Values:
@@ -216,7 +192,6 @@
 # wslconfig_experimental_auto_memory_reclaim: gradual
 
 # Controls whether the virtual disk can dynamically shrink to save space.
-# Available since: Windows 11 
 # Dependencies: None
 # Default: true
 # Values:
@@ -225,7 +200,6 @@
 # wslconfig_experimental_sparse_vhd: true
 
 # Controls whether DNS parsing compatibility is improved.
-# Available since: Windows 11 22H2+
 # Dependencies:
 # - networkingMode=nat (if networkingMode=mirrored, dnsTunneling must be disabled )
 # - dnsProxy=true (if dnsProxy=false, dnsTunneling must be disabled)
@@ -237,7 +211,6 @@
 # wslconfig_experimental_best_effort_dns_parsing: false
 
 # Controls the IP address used for DNS tunneling.
-# Available since: Windows 11 22H2+
 # Dependencies:
 # - Must be used with networkingMode=nat
 # - Requires dnsProxy=true
@@ -246,13 +219,11 @@
 # wslconfig_experimental_dns_tunneling_ip_address: "10.255.255.254"
 
 # Controls the timeout for reading Windows proxy settings on startup (in milliseconds).
-# Available since: Windows 11
 # Dependencies: autoProxy=true (if autoProxy=false, initialAutoProxyTimeout becomes irrelevant).
 # Default: 1000
 # wslconfig_experimental_initial_auto_proxy_timeout: 1000
 
 # Controls whether specific ports are ignored in mirrored networking mode.
-# Available since: Windows 11 22H2+
 # Dependencies: networkingMode=mirrored 
 # Default: Not set
 # Example: ignoredPorts=3000,8080
@@ -260,7 +231,6 @@
 # wslconfig_experimental_ignored_ports:
 
 # Allows the host and container to communicate via loopback (127.0.0.1 from inside containers).
-# Available since: Windows 11 22H2+
 # Dependencies: None
 # Default: false
 # Values:
